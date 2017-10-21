@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
-    public enum TileStatus { EMPTY=0,PLAYER,ENEMY};
+    public enum TileStatus { EMPTY=0,PLAYER,ENEMY,STATIC};
     public TileStatus status;
     public Transform objectOnTile;
 	// Use this for initialization
 	void Start () {
-		
+        GameObject.Find("Tiles").GetComponent<Tiles>().allTiles.Add(transform.position, this);
 	}
 	void Awake()
     {
@@ -34,7 +34,13 @@ public class Tile : MonoBehaviour {
                     status = TileStatus.ENEMY;
                     objectOnTile = other.transform;
                 }
+              
             }
+        }
+        else if(other.tag=="static")
+        {
+            status = TileStatus.STATIC;
+            objectOnTile = other.transform;
         }
        
        

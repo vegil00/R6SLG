@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tiles : MonoBehaviour {
-    [HideInInspector]
+    //[HideInInspector]
     public Dictionary<Vector3, Tile> allTiles;
     public float tileSize;
 	// Use this for initialization
@@ -13,15 +13,15 @@ public class Tiles : MonoBehaviour {
     void Awake()
     {
         allTiles = new Dictionary<Vector3, Tile>();
-        for(int i=0;i<transform.childCount;i++)
-        {
-            if(i==transform.childCount-1)
-            {
-                Debug.Log(transform.childCount - 1);
-            }
+        //for(int i=0;i<transform.childCount;i++)
+        //{
+        //    if(i==transform.childCount-1)
+        //    {
+        //        Debug.Log(transform.childCount - 1);
+        //    }
           
-            allTiles.Add(transform.GetChild(i).position, transform.GetChild(i).GetComponent<Tile>());
-        }
+        //    allTiles.Add(transform.GetChild(i).position, transform.GetChild(i).GetComponent<Tile>());
+        //}
     }
   public  Tile getTile(Vector3 pos)
     {

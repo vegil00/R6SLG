@@ -29,7 +29,7 @@ public class SoilderAnimation : MonoBehaviour {
         {
             targetRotation = Quaternion.LookRotation(agent.desiredVelocity);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateDampTime);
-
+           
 
         }
         else

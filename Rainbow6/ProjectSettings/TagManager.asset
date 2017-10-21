@@ -9,6 +9,7 @@ TagManager:
   - doorFront
   - carDoor
   - Enemy
+  - static
   layers:
   - Default
   - TransparentFX

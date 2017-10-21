@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviorDesigner.Runtime;
+
 
 public class gameController : MonoBehaviour {
     public enum PHASESTATUS { PLAYERPHASE,ENEMYPHASE};
 public enum GAMESTATUS { GAME};
     public PHASESTATUS phaseStatus;
     public GAMESTATUS gameStatus;
-    int curIndex;
+   public int curIndex;
     public List<playerSolider> playerChList;
     public List<enemySolider> enemyChList;
 	// Use this for initialization
@@ -55,36 +57,51 @@ public enum GAMESTATUS { GAME};
             }
             else
             {
-                if(!enemyChList[curIndex].scaned)
+                //if(!enemyChList[curIndex].scaned)
+                //{
+                //    enemyChList[curIndex].behavior.phaseBegin();
+                //}
+                //if(!enemyChList[curIndex].Attacked&&!enemyChList[curIndex].Moved)
+                //{
+                //    if(enemyChList[curIndex].behavior.targetList.Count>0)
+                //    {
+
+                //        enemyChList[curIndex].behavior.getTarget();
+
+
+
+
+
+                //    }
+                //    else
+                //    {
+                //        enemyChList[curIndex].behavior.patrol();
+                //    }
+                //}
+                //if(enemyChList[curIndex].Attacked)
+                //{
+                //    nextCh();
+                //    if(curIndex>=enemyChList.Count)
+                //    {
+                //        changePhase(PHASESTATUS.PLAYERPHASE);
+                //    }
+                //}
+                //GlobalVariables.Instance.GetVariable("ActFinish");
+               SharedBool actfinish =(SharedBool)enemyChList[curIndex].behaviorTree.GetVariable("actFinish");
+                if (actfinish.Value==true)
                 {
-                    enemyChList[curIndex].behavior.phaseBegin();
-                }
-                if(!enemyChList[curIndex].Attacked&&!enemyChList[curIndex].Moved)
-                {
-                    if(enemyChList[curIndex].behavior.targetList.Count>0)
-                    {
-
-                        enemyChList[curIndex].behavior.getTarget();
-
-
-
-
-
-                    }
-                    else
-                    {
-                        enemyChList[curIndex].behavior.patrol();
-                    }
-                }
-                if(enemyChList[curIndex].Attacked)
-                {
+                    enemyChList[curIndex].GetComponent<BehaviorTree>().DisableBehavior();
                     nextCh();
-                    if(curIndex>=enemyChList.Count)
+                    if (curIndex >= enemyChList.Count)
                     {
                         changePhase(PHASESTATUS.PLAYERPHASE);
                     }
                 }
-                
+                //else
+                //{
+                //    enemyChList[curIndex].GetComponent<BehaviorDesigner.Runtime.BehaviorTree>().enabled = true;
+                //}
+
             }
         }
 	}
@@ -116,10 +133,11 @@ public enum GAMESTATUS { GAME};
             curIndex++;
             if(curIndex<enemyChList.Count)
             {
-                if(!enemyChList[curIndex].scaned)
-                {
-                    enemyChList[curIndex].behavior.phaseBegin();
-                }
+                enemyChList[curIndex].behaviorTree.EnableBehavior();
+                //if (!enemyChList[curIndex].scaned)
+                //{
+                //    enemyChList[curIndex].behavior.phaseBegin();
+                //}
             }
         }
         
@@ -139,12 +157,14 @@ public enum GAMESTATUS { GAME};
                 }
                 break;
             case PHASESTATUS.ENEMYPHASE:
-                for(int i=0;i<enemyChList.Count;i++)
+                enemyChList[0].behaviorTree.EnableBehavior();
+                for (int i=0;i<enemyChList.Count;i++)
                 {
                     enemyChList[i].Attacked = false;
                     enemyChList[i].Moved = false;
                     enemyChList[i].aimed = false;
                     enemyChList[i].scaned = false;
+                    enemyChList[i].GetComponent<BehaviorTree>().SetVariableValue("actFinish", false);
                 }
                 break;
         }
