@@ -630,6 +630,7 @@
     <Compile Include="Assets\Scripts\fpsview.cs" />
     <Compile Include="Assets\Scripts\gameController.cs" />
     <Compile Include="Assets\Scripts\move.cs" />
+    <Compile Include="Assets\Scripts\playerControll.cs" />
     <Compile Include="Assets\Scripts\playerSolider.cs" />
     <Compile Include="Assets\Scripts\scanRoute.cs" />
     <Compile Include="Assets\Scripts\shoot.cs" />
