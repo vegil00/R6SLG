@@ -16,7 +16,9 @@ public class enemyBehavior : MonoBehaviour {
     public Transform[] patrolPoints;
     int curPatrolIndex;
     public bool bPartol;
+    public bool bChase;
     NavMeshAgent agent;
+    Vector3 destination;
     // Use this for initialization
     void Start () {
         character = GetComponent<enemySolider>();
@@ -25,6 +27,7 @@ public class enemyBehavior : MonoBehaviour {
         curPatrolIndex = 0;
         bPartol = true;
         agent = GetComponent<NavMeshAgent>();
+        destination = Vector3.zero;
         for(int i=0;i<patrolPoints.Length;i++)
         {
             patrolPoints[i].position = character.allTiles.getTile(patrolPoints[i].position).transform.position;
@@ -46,7 +49,7 @@ public class enemyBehavior : MonoBehaviour {
             // agent.speed = 0;
             character.Moved = true;
             GetComponent<SoilderAnimation>().targetSpeed = 0;
-            
+            destination = Vector3.zero;
             transform.position = character.allTiles.getTile(transform.position).transform.position;
             if (targetList.Count == 0)
             {
@@ -145,17 +148,21 @@ public class enemyBehavior : MonoBehaviour {
     public void patrol()
     {
         bPartol = true;
-        Vector3 destination=transform.position;
-       foreach(KeyValuePair<Vector3,int> kvp in rangeScan.rangeList)
+        //if(destination==Vector3.zero)
         {
-            if((patrolPoints[curPatrolIndex].position-destination).magnitude<(patrolPoints[curPatrolIndex].position-destination).magnitude)
+            destination = transform.position;
+            foreach (KeyValuePair<Vector3, int> kvp in rangeScan.rangeList)
             {
-                if(character.allTiles.getTile(kvp.Key).status==Tile.TileStatus.EMPTY)
-                destination = kvp.Key;
+                if ((patrolPoints[curPatrolIndex].position - destination).magnitude < (patrolPoints[curPatrolIndex].position - destination).magnitude)
+                {
+                    if (character.allTiles.getTile(kvp.Key).status == Tile.TileStatus.EMPTY)
+                        destination = kvp.Key;
+                }
             }
+            GetComponent<NavMeshAgent>().SetDestination(destination);
+            GetComponent<SoilderAnimation>().targetSpeed = character.patrolSpeed;
         }
-        GetComponent<NavMeshAgent>().SetDestination(destination);
-        GetComponent<SoilderAnimation>().targetSpeed = character.patrolSpeed;
+     
     }
     public void nextPoint()
     {

@@ -29,7 +29,7 @@ public class SoilderAnimation : MonoBehaviour {
         {
             targetRotation = Quaternion.LookRotation(agent.desiredVelocity);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateDampTime);
-
+           
 
         }
         else
@@ -42,7 +42,7 @@ public class SoilderAnimation : MonoBehaviour {
             {
                 transform.rotation = targetRotation;
                 aim = false;
-                GetComponent<Animator>().SetBool("shoot", true);
+               // GetComponent<Animator>().SetBool("shoot", true);
                 if(transform.tag=="Player")
                 {
                     thirdPersonalCamera.gameObject.SetActive(true);
@@ -50,7 +50,7 @@ public class SoilderAnimation : MonoBehaviour {
                     thirdPersonalCamera.rotation = transform.Find("cameraPos").rotation;
                 }
                
-                StartCoroutine(shootReturnIdle());
+                //StartCoroutine(shootReturnIdle());
                 
             }
         }
@@ -77,7 +77,15 @@ public class SoilderAnimation : MonoBehaviour {
         Vector3 lookDir = target.position - transform.position;
         lookDir.y = 0;
         targetRotation = Quaternion.LookRotation(lookDir);
+        thirdPersonalCamera.gameObject.SetActive(true);
+        thirdPersonalCamera.position = transform.Find("cameraPos").position;
+        thirdPersonalCamera.rotation = transform.Find("cameraPos").rotation;
         aim = true;
+    }
+    public void shootAt()
+    {
+        GetComponent<Animator>().SetBool("shoot", true);
+        StartCoroutine(shootReturnIdle());
     }
     IEnumerator shootReturnIdle()
     {

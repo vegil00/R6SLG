@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rainbow6.CSharp", "Rainbow6.CSharp.csproj", "{2EE92D29-6C9F-EF59-E549-838A2C2CB951}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rainbow6", "Rainbow6.csproj", "{173EC47A-3CEA-539F-2AC7-C1C6A94D78D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2EE92D29-6C9F-EF59-E549-838A2C2CB951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EE92D29-6C9F-EF59-E549-838A2C2CB951}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2EE92D29-6C9F-EF59-E549-838A2C2CB951}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2EE92D29-6C9F-EF59-E549-838A2C2CB951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{173EC47A-3CEA-539F-2AC7-C1C6A94D78D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{173EC47A-3CEA-539F-2AC7-C1C6A94D78D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{173EC47A-3CEA-539F-2AC7-C1C6A94D78D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{173EC47A-3CEA-539F-2AC7-C1C6A94D78D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
